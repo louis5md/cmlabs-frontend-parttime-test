@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import type { Ingredient } from "@/app/lib/themealdb";
 import { EmptyState } from "@/app/components/ui/EmptyState";
 import { IngredientCard } from "./IngredientCard";
@@ -12,9 +12,10 @@ type IngredientListProps = {
 
 export function IngredientList({ ingredients }: IngredientListProps) {
   const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
 
   const filteredIngredients = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase();
+    const normalizedQuery = deferredQuery.trim().toLowerCase();
 
     if (!normalizedQuery) {
       return ingredients;
@@ -23,7 +24,7 @@ export function IngredientList({ ingredients }: IngredientListProps) {
     return ingredients.filter((ingredient) =>
       ingredient.strIngredient.toLowerCase().includes(normalizedQuery),
     );
-  }, [ingredients, query]);
+  }, [ingredients, deferredQuery]);
 
   return (
     <section className="space-y-6">
