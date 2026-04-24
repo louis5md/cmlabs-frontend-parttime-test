@@ -116,6 +116,12 @@ Folder penting:
 
 ## Deployment
 
+Aplikasi yang sudah dideploy dapat diakses di:
+
+```bash
+https://cmlabs-frontend-parttime-test-murex.vercel.app/
+```
+
 Aplikasi ini dapat dideploy ke platform seperti:
 
 - Vercel
